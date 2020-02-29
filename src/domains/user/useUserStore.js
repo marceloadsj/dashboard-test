@@ -1,10 +1,21 @@
 import { useContext } from "react";
 
+import fetch from "utils/fetch";
 import StoreContext from "contexts/StoreContext";
 
 export function userInitializer() {
   return {
-    loggedUser: null
+    loggedUser: null,
+
+    get userIsLogged() {
+      return !!this.loggedUser;
+    },
+
+    async login(values) {
+      const response = await fetch.post("/login", values);
+
+      this.loggedUser = response.data;
+    }
   };
 }
 

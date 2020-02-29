@@ -1,1 +1,44 @@
 @import "~antd/dist/antd.css";
+
+/* sizes and positions */
+.w-100 {
+  width: 100px;
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.pb-10 {
+  padding-bottom: 10px;
+}
+
+.mt-50 {
+  margin-top: 50px;
+}
+
+.\-mt-50 {
+  margin-top: -50px;
+}
+
+body .mb-50 {
+  margin-bottom: 50px;
+}
+
+/* fonts and texts */
+.text-center {
+  text-align: center;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+/* colors and appearances */
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.text-blue-500 {
+  color: #1890ff;
+}
