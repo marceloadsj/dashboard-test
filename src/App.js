@@ -2,6 +2,7 @@ import React from "react";
 import { Layout } from "antd";
 import { CoffeeOutlined, HeartOutlined } from "@ant-design/icons";
 import { Switch, Route, Redirect } from "react-router-dom";
+import { useObserver } from "mobx-react-lite";
 
 import useUserStore from "domains/user/useUserStore";
 import LoginPage from "domains/user/LoginPage";
@@ -9,7 +10,7 @@ import LoginPage from "domains/user/LoginPage";
 export default function App() {
   const userStore = useUserStore();
 
-  return (
+  return useObserver(() => (
     <Layout className="min-h-screen">
       <Layout.Header />
 
@@ -41,5 +42,5 @@ export default function App() {
         with <HeartOutlined /> and <CoffeeOutlined />
       </Layout.Footer>
     </Layout>
-  );
+  ));
 }
