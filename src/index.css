@@ -42,3 +42,7 @@ body .mb-50 {
 .text-blue-500 {
   color: #1890ff;
 }
+
+.opacity-50 {
+  opacity: 0.5;
+}

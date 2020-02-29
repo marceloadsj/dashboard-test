@@ -12,7 +12,7 @@ export function userInitializer() {
     },
 
     async login(values) {
-      const response = await fetch.post("/login", values);
+      const response = await fetch.post("/user/login", values);
 
       this.loggedUser = response.data;
     }
