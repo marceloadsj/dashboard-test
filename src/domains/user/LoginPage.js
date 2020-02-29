@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
@@ -30,22 +30,33 @@ const passwordRules = [
 export default function LoginPage() {
   const userStore = useUserStore();
 
+  const [loading, setLoading] = useState(false);
+
   async function onFinish(values) {
+    setLoading(true);
+
     try {
       await userStore.login(values);
+
+      notification.success({
+        message: "Welcome",
+        description: `Hello ${userStore.loggedUser.name}`
+      });
     } catch (exception) {
       notification.error({
         message: "Login Error",
         description:
           exception.response?.data?.message || "An unknown error happened"
       });
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <Row justify="center" className="mt-50">
       <Col span={6}>
-        <Card className="shadow">
+        <Card className="shadow mb-50">
           <Form
             labelCol={{ span: 5 }}
             wrapperCol={{ span: 19 }}
@@ -70,6 +81,7 @@ export default function LoginPage() {
               className="pb-10"
             >
               <Input
+                disabled={loading}
                 size="large"
                 placeholder="E.g john.doe@example.com"
                 prefix={<MailOutlined />}
@@ -83,6 +95,7 @@ export default function LoginPage() {
               className="pb-10"
             >
               <Input.Password
+                disabled={loading}
                 size="large"
                 placeholder="E.g your secret password here"
                 autoComplete="password"
@@ -97,6 +110,7 @@ export default function LoginPage() {
                 size="large"
                 block
                 icon={<LoginOutlined />}
+                loading={loading}
               >
                 Log into my Account
               </Button>
@@ -116,6 +130,15 @@ export default function LoginPage() {
             </Link>
           </Form>
         </Card>
+
+        <Typography.Paragraph className="opacity-50 text-center">
+          For testing purposes, you can login with:
+          <div className="font-bold">
+            Email: demo@demo.com
+            <br />
+            Password: demo
+          </div>
+        </Typography.Paragraph>
       </Col>
     </Row>
   );
