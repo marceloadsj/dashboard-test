@@ -33,6 +33,8 @@ I'm following an approach, focused to build a highly scalable and easily maintan
 
 - [React Router](https://reacttraining.com/react-router) - Library responsible to structure the routing system of the SPA application in a declarative way.
 
+- [Socket.io](https://socket.io/) - The main library to work with websockets. We can send and receive realtime messages between clients and server. It take care of upgrading from pooling to pure websocket when available.
+
 - WIP...
 
 ##### Support Libraries:
