@@ -76,13 +76,13 @@ export default function App() {
           <Layout.Content>
             <Switch>
               {!userStore.userIsLogged && (
-                <Route path="/login">
+                <Route path="/login" exact>
                   <LoginPage />
                 </Route>
               )}
 
               {userStore.userIsLogged && (
-                <Route path="/">
+                <Route path="/" exact>
                   <DashboardPage />
                 </Route>
               )}
