@@ -19,6 +19,8 @@ _This project was bootstrapped with: [Create React App](https://github.com/faceb
 
 **In order to have access of all features, you should run the backend, following the steps of the [https://github.com/marceloadsj/dashboard-test-backend](https://github.com/marceloadsj/dashboard-test-backend) repository as well**
 
+You can run `yarn test` run start the testing console and run all tests of the project.
+
 ---
 
 ### Technical Decisions
@@ -71,6 +73,10 @@ I would like to present some of the structural decisions I used on the repo, and
 
 7. [App](https://github.com/marceloadsj/dashboard-test/blob/master/src/App.js)
    All the main routes are being registered on the entry App component. It's okay for that size of application, but we can improve moving the registration inside the domains folder, so each domain can register their own pages. We can improve even more splitting the bundle, maybe per route, so the client don't need to download the whole js bundle when entering the app, only when navigating to each page.
+
+#### Tests
+
+I created some tests for the biggest and most critical components, like the pages and the entry points. They are rendering tests, looking to see if the component renders properly on the screen and track the data-testid attribute.
 
 #### Backend
 
