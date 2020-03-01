@@ -15,6 +15,7 @@
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
+    "secure-ls": "^1.2.6",
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
