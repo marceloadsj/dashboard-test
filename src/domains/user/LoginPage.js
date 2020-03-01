@@ -8,12 +8,13 @@ import {
   Input,
   Button,
   Divider,
-  notification
+  notification,
+  Tooltip
 } from "antd";
 import { Link } from "react-router-dom";
 import {
   LoginOutlined,
-  MailOutlined,
+  UserOutlined,
   LockOutlined,
   UserAddOutlined
 } from "@ant-design/icons";
@@ -21,7 +22,9 @@ import {
 import { ReactComponent as Logo } from "images/logo.svg";
 import useUserStore from "./useUserStore";
 
-const emailRules = [{ required: true, message: "Please input your email" }];
+const usernameRules = [
+  { required: true, message: "Please input your username or email" }
+];
 
 const passwordRules = [
   { required: true, message: "Please input your password" }
@@ -55,11 +58,11 @@ export default function LoginPage() {
 
   return (
     <Row justify="center" className="mt-50">
-      <Col span={6}>
+      <Col xs={23} sm={19} md={14} lg={11} xl={9} xxl={7}>
         <Card className="shadow mb-50">
           <Form
-            labelCol={{ span: 5 }}
-            wrapperCol={{ span: 19 }}
+            labelCol={{ span: 6 }}
+            wrapperCol={{ span: 18 }}
             onFinish={onFinish}
           >
             <div className="text-center mb-50">
@@ -75,16 +78,16 @@ export default function LoginPage() {
             </div>
 
             <Form.Item
-              label="Email"
-              name="email"
-              rules={emailRules}
+              label={<Tooltip title="Username or Email">Username</Tooltip>}
+              name="username"
+              rules={usernameRules}
               className="pb-10"
             >
               <Input
                 disabled={loading}
                 size="large"
-                placeholder="E.g john.doe@example.com"
-                prefix={<MailOutlined />}
+                placeholder="E.g john_doe or john.doe@example.com"
+                prefix={<UserOutlined />}
               />
             </Form.Item>
 
@@ -131,10 +134,10 @@ export default function LoginPage() {
           </Form>
         </Card>
 
-        <Typography.Paragraph className="opacity-50 text-center">
+        <Typography.Paragraph className="opacity-50 text-center text-sm">
           For testing purposes, you can login with:
           <div className="font-bold">
-            Email: demo@demo.com
+            Username: demo_user or Email: demo@demo.com
             <br />
             Password: demo
           </div>
