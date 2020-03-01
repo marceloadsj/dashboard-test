@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Layout, Row, Col, Dropdown, Menu, Avatar, Typography } from "antd";
 import { useObserver } from "mobx-react-lite";
 import {
@@ -6,16 +6,25 @@ import {
   LineChartOutlined,
   TableOutlined
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { ReactComponent as Logo } from "images/logo.svg";
 import useUserStore from "domains/user/useUserStore";
 
 const avatarStyle = { backgroundColor: "#1890ff" };
-const defaultSelectedKeys = ["dashboard"];
 
 export default function Header() {
   const userStore = useUserStore();
+  const location = useLocation();
+
+  const selectedKeys = useMemo(() => {
+    let selectedKeys = [];
+
+    if (location.pathname === "/") selectedKeys.push("chart");
+    if (location.pathname === "/list") selectedKeys.push("list");
+
+    return selectedKeys;
+  }, [location.pathname]);
 
   const onLogoutClick = () => userStore.logout();
 
@@ -31,24 +40,24 @@ export default function Header() {
     <Layout.Header>
       <Row justify="space-between" className="h-full">
         <Col className="flex">
-          <div className="h-full items-center mr-50 hidden md:flex">
+          <Link to="/" className="h-full items-center mr-50 hidden md:flex">
             <Logo className="text-white w-30 mr-10" />
 
             <Typography.Title level={4} className="text-white mb-0">
               {process.env.REACT_APP_NAME}
             </Typography.Title>
-          </div>
+          </Link>
 
           {userStore.userIsLogged && (
             <Menu
               theme="dark"
               mode="horizontal"
-              defaultSelectedKeys={defaultSelectedKeys}
+              selectedKeys={selectedKeys}
               className="line-h-64"
             >
-              <Menu.Item key="dashboard">
+              <Menu.Item key="chart">
                 <Link to="/">
-                  <LineChartOutlined /> Dashboard
+                  <LineChartOutlined /> Chart
                 </Link>
               </Menu.Item>
 

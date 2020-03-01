@@ -8,7 +8,7 @@ import useSocket from "contexts/useSocket";
 import useUserStore from "domains/user/useUserStore";
 import Header from "domains/app/Header";
 import LoginPage from "domains/user/LoginPage";
-import DashboardPage from "domains/dashboard/DashboardPage";
+import ChartPage from "domains/dashboard/ChartPage";
 import ListPage from "domains/dashboard/ListPage";
 
 /**
@@ -85,7 +85,7 @@ export default function App() {
 
               {userStore.userIsLogged && (
                 <Route path="/" exact>
-                  <DashboardPage />
+                  <ChartPage />
                 </Route>
               )}
 
