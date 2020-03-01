@@ -26,15 +26,23 @@ export function userInitializer() {
       return !!this.loggedUser;
     },
 
+    get loggedUserInitials() {
+      return this.loggedUser?.name
+        ?.split(" ")
+        ?.reduce((initials, name) => `${initials}${name[0]}`, "");
+    },
+
     async getLoggedUser() {
       const response = await fetch.get("/user/me", {
-        headers: { Authorization: `Bearer ${this.loggedUserToken}` }
+        meta: { token: this.loggedUserToken }
       });
 
       this.loggedUser = response.data;
     },
 
     async logout() {
+      fetch.get("/user/logout", { meta: { token: this.loggedUserToken } });
+
       secureLs.remove(process.env.REACT_APP_LOGGED_USER_LOCALSTORAGE_KEY);
 
       this.loggedUser = null;
