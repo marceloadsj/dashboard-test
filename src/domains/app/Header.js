@@ -73,14 +73,14 @@ export default function Header() {
         {userStore.userIsLogged && (
           <Col>
             <Dropdown overlay={userMenu}>
-              <div className="cursor-pointer">
+              <div className="cursor-pointer flex items-center h-full">
                 <Avatar style={avatarStyle} className="mr-10">
                   {userStore.loggedUserInitials}
                 </Avatar>
 
-                <span className="text-white font-bold hidden md:inline">
+                <div className="text-white font-bold hidden md:block truncate w-100">
                   {userStore.loggedUser.name}
-                </span>
+                </div>
               </div>
             </Dropdown>
           </Col>
