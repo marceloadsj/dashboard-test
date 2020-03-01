@@ -17,7 +17,7 @@ const activeUsers = Array(days)
   .map((_, index) => {
     return {
       quantity: getRandomInteger(0, 50),
-      date: `${index + 1}/03/20`
+      date: `${index + 1}/3/20`
     };
   });
 
@@ -26,7 +26,7 @@ const newUsers = Array(days)
   .map((_, index) => {
     return {
       quantity: getRandomInteger(0, 50),
-      date: `${index + 1}/03/20`
+      date: `${index + 1}/3/20`
     };
   });
 
