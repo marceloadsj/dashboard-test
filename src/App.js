@@ -9,6 +9,7 @@ import useUserStore from "domains/user/useUserStore";
 import Header from "domains/app/Header";
 import LoginPage from "domains/user/LoginPage";
 import DashboardPage from "domains/dashboard/DashboardPage";
+import ListPage from "domains/dashboard/ListPage";
 
 /**
  * Effect to connect/disconnect the logged user to the websocket network
@@ -85,6 +86,12 @@ export default function App() {
               {userStore.userIsLogged && (
                 <Route path="/" exact>
                   <DashboardPage />
+                </Route>
+              )}
+
+              {userStore.userIsLogged && (
+                <Route path="/list" exact>
+                  <ListPage />
                 </Route>
               )}
 

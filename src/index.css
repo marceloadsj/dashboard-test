@@ -53,6 +53,10 @@ body .mb-50 {
   margin-right: 10px;
 }
 
+.mr-50 {
+  margin-right: 50px;
+}
+
 /* fonts and texts */
 .text-sm {
   font-size: 12px;
@@ -87,6 +91,10 @@ body .text-white {
   cursor: pointer;
 }
 
+.line-h-64 {
+  line-height: 64px;
+}
+
 /* structure and display */
 .flex {
   display: flex;
@@ -94,4 +102,18 @@ body .text-white {
 
 .items-center {
   align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:inline {
+    display: inline;
+  }
 }
