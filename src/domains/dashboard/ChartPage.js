@@ -124,7 +124,7 @@ export default function ChartPage() {
 
             <Col>
               <Typography.Text>
-                Quantity x Date: {randomChartData[0].length} days in total
+                Quantity x Date: {randomChartData[0].data.length} days in total
               </Typography.Text>
             </Col>
           </Row>
