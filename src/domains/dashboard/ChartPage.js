@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Card, Typography } from "antd";
 import { ResponsiveLine } from "@nivo/line";
-import { DashboardOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { LineChartOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 
 function getRandomInteger(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -58,12 +58,12 @@ const chartProps = {
   ]
 };
 
-export default function DashboardPage() {
+export default function ChartPage() {
   return (
     <Row justify="center" className="m-20">
       <Col span={24}>
         <Typography.Title level={3}>
-          <DashboardOutlined /> Dashboard
+          <LineChartOutlined /> Chart
         </Typography.Title>
 
         <Card className="shadow mb-20">
