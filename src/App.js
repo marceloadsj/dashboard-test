@@ -8,6 +8,7 @@ import useUserStore from "domains/user/useUserStore";
 import Header from "domains/app/Header";
 import Footer from "domains/app/Footer";
 import LoginPage from "domains/user/LoginPage";
+import RegisterPage from "domains/user/RegisterPage";
 import ChartPage from "domains/dashboard/ChartPage";
 import ListPage from "domains/dashboard/ListPage";
 
@@ -90,6 +91,12 @@ export default function App() {
             {!userStore.userIsLogged && (
               <Route path="/login" exact>
                 <LoginPage />
+              </Route>
+            )}
+
+            {!userStore.userIsLogged && (
+              <Route path="/register" exact>
+                <RegisterPage />
               </Route>
             )}
 
