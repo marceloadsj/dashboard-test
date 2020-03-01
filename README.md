@@ -25,6 +25,8 @@ _This project was bootstrapped with: [Create React App](https://github.com/faceb
 
 I'm following an approach, focused to build a highly scalable and easily maintanable application. Using a Domain Driven Approach to separate the main features, I'm using Mobx to create shared stores to control the central data, like informations of the logged user.
 
+**I'm not preventing the same user to login twice, so we can have a scenario where the user receives a login message of the same user**
+
 #### Main Libraries:
 
 - [Ant Design](https://ant.design/) - The main ui library, one of the most famous React libraries with the largest component availability. Fully React hooks compatible in the [version 4, launched on 27/02/20](https://github.com/ant-design/ant-design/releases/tag/4.0.0);
