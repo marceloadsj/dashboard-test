@@ -162,5 +162,10 @@ export default function LoginPage() {
 }
 
 function LoginPageRegisterButton({ navigate, ...props }) {
-  return <Button onClick={navigate} {...props} />;
+  function onButtonClick(event) {
+    event.preventDefault();
+    navigate(event);
+  }
+
+  return <Button onClick={onButtonClick} {...props} />;
 }
