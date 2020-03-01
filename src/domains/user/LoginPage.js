@@ -51,7 +51,7 @@ export default function LoginPage() {
         description:
           exception.response?.data?.message || "An unknown error happened"
       });
-    } finally {
+
       setLoading(false);
     }
   }
