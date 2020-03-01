@@ -7,6 +7,7 @@ import { useObserver } from "mobx-react-lite";
 import useSocket from "contexts/useSocket";
 import useUserStore from "domains/user/useUserStore";
 import LoginPage from "domains/user/LoginPage";
+import DashboardPage from "domains/dashboard/DashboardPage";
 
 /**
  * Effect to connect/disconnect the logged user to the websocket network
@@ -80,7 +81,13 @@ export default function App() {
                 </Route>
               )}
 
-              {!userStore.userIsLogged && <Redirect to="/login" />}
+              {userStore.userIsLogged && (
+                <Route path="/">
+                  <DashboardPage />
+                </Route>
+              )}
+
+              <Redirect to={userStore.userIsLogged ? "/" : "/login"} />
             </Switch>
           </Layout.Content>
         </Layout>
