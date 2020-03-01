@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 import SecureLS from "secure-ls";
+import { useLocalStore } from "mobx-react-lite";
 
 import fetch from "utils/fetch";
 import StoreContext from "contexts/StoreContext";
@@ -62,8 +63,8 @@ export function userInitializer() {
   };
 }
 
-export default function useUserStore() {
-  const userStore = useContext(StoreContext).userStore;
+export function useUserStoreInit() {
+  const userStore = useLocalStore(userInitializer);
 
   useEffect(() => {
     if (userStore.loggedUserToken) {
@@ -80,4 +81,8 @@ export default function useUserStore() {
   }, [userStore]);
 
   return userStore;
+}
+
+export default function useUserStore() {
+  return useContext(StoreContext).userStore;
 }
