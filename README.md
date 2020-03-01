@@ -1,4 +1,4 @@
-# [WIP] Dashboard Test
+# Dashboard Test
 
 [![Build Status](https://travis-ci.org/marceloadsj/dashboard-test.svg?branch=master)](https://travis-ci.org/marceloadsj/dashboard-test) ![Heroku](http://heroku-badge.herokuapp.com/?app=mjr-dashboard-test&style=flat&svg=1)
 
