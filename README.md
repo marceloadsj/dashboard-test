@@ -1,5 +1,7 @@
 # [WIP] Dashboard Test
 
+[![Build Status](https://travis-ci.org/marceloadsj/dashboard-test.svg?branch=master)](https://travis-ci.com/marceloadsj/dashboard-test) ![Heroku](https://heroku-badge.herokuapp.com/?app=mjr-dashboard-test)
+
 This is a testing project, building a dashboard with some specific features.
 
 You can visit the application clicking here [https://mjr-dashboard-test.herokuapp.com](https://mjr-dashboard-test.herokuapp.com).
