@@ -42,6 +42,7 @@ I'm following an approach, focused to build a highly scalable and easily maintan
 ##### Support Libraries:
 
 - [Axios](https://github.com/axios/axios)
+- [Secure-ls](https://softvar.github.io/secure-ls)
 - WIP...
 
 #### Backend
