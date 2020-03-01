@@ -121,13 +121,13 @@ export default function ListPage() {
   }, [search]);
 
   return (
-    <Row justify="center" className="m-20">
+    <Row justify="center" className="m-20" data-testid="list-page">
       <Col span={24}>
         <Typography.Title level={3}>
           <TableOutlined /> List
         </Typography.Title>
 
-        <Card className="shadow mb-20">
+        <Card className="shadow mb-20" data-testid="list-card">
           <Row justify="space-between" className="mb-20">
             <Col>
               <Typography.Title level={4}>List of Items</Typography.Title>

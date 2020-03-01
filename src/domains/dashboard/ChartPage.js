@@ -73,16 +73,14 @@ export default function ChartPage() {
     return [{ id: "Stats", data }];
   }, [from, to]);
 
-  console.log(filteredStatsData.data);
-
   return (
-    <Row justify="center" className="m-20">
+    <Row justify="center" className="m-20" data-testid="chart-page">
       <Col span={24}>
         <Typography.Title level={3}>
           <LineChartOutlined /> Chart
         </Typography.Title>
 
-        <Card className="shadow mb-20">
+        <Card className="shadow mb-20" data-testid="chart-first-card">
           <Row justify="space-between">
             <Col>
               <Typography.Title level={4}>
@@ -114,7 +112,7 @@ export default function ChartPage() {
           </div>
         </Card>
 
-        <Card className="shadow mb-20">
+        <Card className="shadow mb-20" data-testid="chart-second-card">
           <Row justify="space-between">
             <Col>
               <Typography.Title level={4}>

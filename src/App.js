@@ -82,7 +82,7 @@ export default function App() {
   }, [location.search]);
 
   return useObserver(() => (
-    <Layout className="min-h-screen">
+    <Layout className="min-h-screen" data-testid="app">
       <Header />
 
       <Layout>

@@ -77,12 +77,13 @@ export default function RegisterPage() {
   }
 
   return useObserver(() => (
-    <Row justify="center" className="mt-50">
+    <Row justify="center" className="mt-50" data-testid="register-page">
       <Col xs={23} sm={19} md={14} lg={11} xl={9} xxl={7}>
         <Form
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
           onFinish={onFinish}
+          data-testid="register-form"
         >
           <div className="text-center mb-50">
             <Logo className="w-100 text-blue-500 -mt-30 pb-10" />
