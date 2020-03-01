@@ -1,52 +1,23 @@
-import React from "react";
-import { Row, Col, Card, Typography } from "antd";
+import React, { useState, useMemo } from "react";
+import { Row, Col, Card, Typography, DatePicker, Tooltip } from "antd";
 import { ResponsiveLine } from "@nivo/line";
-import { LineChartOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import {
+  LineChartOutlined,
+  UsergroupAddOutlined,
+  AppstoreOutlined,
+  InfoCircleOutlined
+} from "@ant-design/icons";
+import moment from "moment";
 
-function getRandomInteger(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
-/**
- * Generating random data here to populate the chart
- */
-const days = getRandomInteger(5, 15);
-
-const activeUsers = Array(days)
-  .fill()
-  .map((_, index) => {
-    return {
-      quantity: getRandomInteger(0, 50),
-      date: `${index + 1}/3/20`
-    };
-  });
-
-const newUsers = Array(days)
-  .fill()
-  .map((_, index) => {
-    return {
-      quantity: getRandomInteger(0, 50),
-      date: `${index + 1}/3/20`
-    };
-  });
-
-/**
- * Parsing the random data into components format, so we can show the chart
- */
-const parsedData = [
-  {
-    id: "Active Users",
-    data: activeUsers.map(item => ({ x: item.date, y: item.quantity }))
-  },
-  {
-    id: "New Users",
-    data: newUsers.map(item => ({ x: item.date, y: item.quantity }))
-  }
-];
+import statsData from "utils/stats.json";
+import randomChartData from "utils/randomChartData";
 
 const chartProps = {
-  margin: { top: 30, right: 110, bottom: 30, left: 30 },
+  margin: { top: 30, right: 110, bottom: 100, left: 50 },
   pointBorderColor: { from: "serieColor" },
+  axisBottom: {
+    tickRotation: 45
+  },
   legends: [
     {
       anchor: "bottom-right",
@@ -58,7 +29,52 @@ const chartProps = {
   ]
 };
 
+const initialFrom = moment("24/12/2019", "DD/MM/YYYY");
+const initialRange = [initialFrom, moment(initialFrom).add(5, "days")];
+
+/**
+ * Parsing the stats.json data to add it to chart
+ */
+const parsedStatsData = statsData.map(({ quantity, date }) => ({
+  x: date,
+  y: quantity
+}));
+
 export default function ChartPage() {
+  const [range, setRange] = useState(initialRange);
+
+  const onRangeChange = range => {
+    let [from, to] = range || [];
+
+    if (from && to) {
+      const maxTo = moment(from).add(5, "days");
+      if (to > maxTo) to = maxTo;
+
+      setRange([from, to]);
+
+      return;
+    }
+
+    setRange();
+  };
+
+  const [from, to] = range || initialRange;
+
+  const filteredStatsData = useMemo(() => {
+    let data = [];
+
+    if (from && to) {
+      data = parsedStatsData.filter(data => {
+        const date = moment(data.x);
+        return date >= from && date <= to;
+      });
+    }
+
+    return [{ id: "Stats", data }];
+  }, [from, to]);
+
+  console.log(filteredStatsData.data);
+
   return (
     <Row justify="center" className="m-20">
       <Col span={24}>
@@ -70,20 +86,52 @@ export default function ChartPage() {
           <Row justify="space-between">
             <Col>
               <Typography.Title level={4}>
+                <AppstoreOutlined /> Stats
+              </Typography.Title>
+            </Col>
+
+            <Col>
+              <Tooltip title="Max range of 5 days">
+                <InfoCircleOutlined className="mr-10" />
+              </Tooltip>
+
+              <DatePicker.RangePicker
+                value={range}
+                onChange={onRangeChange}
+                defaultPickerValue={initialRange}
+              />
+            </Col>
+          </Row>
+
+          <div className="h-500">
+            <ResponsiveLine
+              data={filteredStatsData}
+              useMesh
+              lineWidth={3}
+              pointBorderWidth={5}
+              {...chartProps}
+            />
+          </div>
+        </Card>
+
+        <Card className="shadow mb-20">
+          <Row justify="space-between">
+            <Col>
+              <Typography.Title level={4}>
                 <UsergroupAddOutlined /> New and Active Users
               </Typography.Title>
             </Col>
 
             <Col>
               <Typography.Text>
-                Quantity x Date: {activeUsers.length} items in total
+                Quantity x Date: {randomChartData[0].length} days in total
               </Typography.Text>
             </Col>
           </Row>
 
           <div className="h-500">
             <ResponsiveLine
-              data={parsedData}
+              data={randomChartData}
               useMesh
               lineWidth={3}
               pointBorderWidth={5}
