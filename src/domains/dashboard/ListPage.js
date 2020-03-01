@@ -133,7 +133,7 @@ export default function ListPage() {
               <Typography.Title level={4}>List of Items</Typography.Title>
             </Col>
 
-            <Col span={6}>
+            <Col>
               <Input.Search
                 allowClear
                 enterButton
