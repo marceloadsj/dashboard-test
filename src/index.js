@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { notification } from "antd";
 
 import "./index.css";
 import StoreProvider from "./contexts/StoreProvider";
 import SocketProvider from "./contexts/SocketProvider";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+
+notification.config({ placement: "bottomRight" });
 
 ReactDOM.render(
   <BrowserRouter>

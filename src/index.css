@@ -1,8 +1,16 @@
 @import "~antd/dist/antd.css";
 
 /* sizes and positions */
+.w-30 {
+  width: 30px;
+}
+
 .w-100 {
   width: 100px;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .h-500 {
@@ -29,12 +37,20 @@
   margin-top: -50px;
 }
 
+body .mb-0 {
+  margin-bottom: 0px;
+}
+
 .mb-20 {
   margin-bottom: 20px;
 }
 
 body .mb-50 {
   margin-bottom: 50px;
+}
+
+.mr-10 {
+  margin-right: 10px;
 }
 
 /* fonts and texts */
@@ -55,10 +71,27 @@ body .mb-50 {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
+body .text-white {
+  color: white;
+}
+
 .text-blue-500 {
   color: #1890ff;
 }
 
 .opacity-50 {
   opacity: 0.5;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+/* structure and display */
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
 }

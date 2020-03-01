@@ -6,6 +6,7 @@ import { useObserver } from "mobx-react-lite";
 
 import useSocket from "contexts/useSocket";
 import useUserStore from "domains/user/useUserStore";
+import Header from "domains/app/Header";
 import LoginPage from "domains/user/LoginPage";
 import DashboardPage from "domains/dashboard/DashboardPage";
 
@@ -69,20 +70,20 @@ export default function App() {
 
   return useObserver(() => (
     <Layout className="min-h-screen">
-      <Layout.Header />
+      <Header />
 
       <Layout>
         <Layout>
           <Layout.Content>
             <Switch>
               {!userStore.userIsLogged && (
-                <Route path="/login">
+                <Route path="/login" exact>
                   <LoginPage />
                 </Route>
               )}
 
               {userStore.userIsLogged && (
-                <Route path="/">
+                <Route path="/" exact>
                   <DashboardPage />
                 </Route>
               )}
