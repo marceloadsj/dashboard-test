@@ -67,6 +67,10 @@ export function userInitializer() {
           error
         );
       }
+    },
+
+    register(values) {
+      return fetch.post("/user/register", values);
     }
   };
 }
