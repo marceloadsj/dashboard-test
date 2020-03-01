@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   Row,
   Col,
@@ -13,6 +13,8 @@ import {
 import { TableOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 import dataSource from "utils/items.json";
+
+const debounceMs = 500;
 
 const colors = {
   SUSPENDED: "red",
@@ -83,6 +85,25 @@ const columns = [
 
 export default function ListPage() {
   const [search, setSearch] = useState("");
+  const timeoutRef = useRef();
+
+  function onSearchChange(event) {
+    clearTimeout(timeoutRef.current);
+
+    const value = event.target.value;
+
+    timeoutRef.current = setTimeout(() => {
+      setSearch(search => {
+        if (search !== value) return value;
+
+        return search;
+      });
+    }, debounceMs);
+  }
+
+  useEffect(() => {
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   const parsedDataSource = useMemo(() => {
     if (!search) return dataSource;
@@ -118,6 +139,7 @@ export default function ListPage() {
                 enterButton
                 placeholder="Search for any field here"
                 onSearch={setSearch}
+                onChange={onSearchChange}
               />
             </Col>
           </Row>
