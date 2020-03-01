@@ -37,7 +37,7 @@ export default function Header() {
   );
 
   return useObserver(() => (
-    <Layout.Header>
+    <Layout.Header data-testid="header">
       <Row justify="space-between" className="h-full">
         <Col className="flex">
           <Link to="/" className="h-full items-center mr-50 hidden md:flex">

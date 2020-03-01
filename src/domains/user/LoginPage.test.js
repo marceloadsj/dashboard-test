@@ -2,9 +2,9 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
-import App from "./App";
-import StoreProvider from "./contexts/StoreProvider";
-import SocketProvider from "./contexts/SocketProvider";
+import LoginPage from "./LoginPage";
+import StoreProvider from "contexts/StoreProvider";
+import SocketProvider from "contexts/SocketProvider";
 
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {
@@ -17,52 +17,52 @@ beforeAll(() => {
   });
 });
 
-describe("render application", () => {
-  test("get app", () => {
+describe("render login page", () => {
+  test("get login page", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <LoginPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("app");
+    const element = getByTestId("login-page");
 
     expect(element).toBeInTheDocument();
   });
 
-  test("get header", () => {
+  test("get login card", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <LoginPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("header");
+    const element = getByTestId("login-card");
 
     expect(element).toBeInTheDocument();
   });
 
-  test("get footer", () => {
-    const { getByTestId } = render(
+  test("get welcome text", () => {
+    const { getByText } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <LoginPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("footer");
+    const element = getByText(/Welcome to/);
 
-    expect(element).toBeInTheDocument();
+    expect(element.innerHTML).toBe(`Welcome to ${process.env.REACT_APP_NAME}`);
   });
 });

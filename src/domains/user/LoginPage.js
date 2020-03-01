@@ -61,7 +61,7 @@ export default function LoginPage() {
   }
 
   return useObserver(() => (
-    <Row justify="center" className="mt-50">
+    <Row justify="center" className="mt-50" data-testid="login-page">
       <Col xs={23} sm={19} md={14} lg={11} xl={9} xxl={7}>
         {userStore.userHasToken && (
           <div className="text-center">
@@ -71,7 +71,7 @@ export default function LoginPage() {
 
         {!userStore.userHasToken && (
           <>
-            <Card className="shadow mb-50">
+            <Card className="shadow mb-50" data-testid="login-card">
               <Form
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}

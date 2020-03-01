@@ -4,7 +4,7 @@ import { CoffeeOutlined, HeartOutlined } from "@ant-design/icons";
 
 export default function Footer() {
   return (
-    <Layout.Footer className="text-center">
+    <Layout.Footer className="text-center" data-testid="footer">
       Created by{" "}
       <a
         href="https://github.com/marceloadsj"

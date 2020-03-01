@@ -2,9 +2,9 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
-import App from "./App";
-import StoreProvider from "./contexts/StoreProvider";
-import SocketProvider from "./contexts/SocketProvider";
+import RegisterPage from "./RegisterPage";
+import StoreProvider from "contexts/StoreProvider";
+import SocketProvider from "contexts/SocketProvider";
 
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {
@@ -17,52 +17,54 @@ beforeAll(() => {
   });
 });
 
-describe("render application", () => {
-  test("get app", () => {
+describe("render register page", () => {
+  test("get register page", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <RegisterPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("app");
+    const element = getByTestId("register-page");
 
     expect(element).toBeInTheDocument();
   });
 
-  test("get header", () => {
+  test("get register form", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <RegisterPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("header");
+    const element = getByTestId("register-form");
 
     expect(element).toBeInTheDocument();
   });
 
-  test("get footer", () => {
-    const { getByTestId } = render(
+  test("get welcome text", () => {
+    const { getByText } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <RegisterPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("footer");
+    const element = getByText(/Register a new Account at/);
 
-    expect(element).toBeInTheDocument();
+    expect(element.innerHTML).toBe(
+      `Register a new Account at ${process.env.REACT_APP_NAME}`
+    );
   });
 });

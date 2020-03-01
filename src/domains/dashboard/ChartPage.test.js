@@ -2,9 +2,9 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 
-import App from "./App";
-import StoreProvider from "./contexts/StoreProvider";
-import SocketProvider from "./contexts/SocketProvider";
+import ChartPage from "./ChartPage";
+import StoreProvider from "contexts/StoreProvider";
+import SocketProvider from "contexts/SocketProvider";
 
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {
@@ -17,51 +17,51 @@ beforeAll(() => {
   });
 });
 
-describe("render application", () => {
-  test("get app", () => {
+describe("render chart page", () => {
+  test("get chart page", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <ChartPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("app");
+    const element = getByTestId("chart-page");
 
     expect(element).toBeInTheDocument();
   });
 
-  test("get header", () => {
+  test("get chart-first card", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <ChartPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("header");
+    const element = getByTestId("chart-first-card");
 
     expect(element).toBeInTheDocument();
   });
 
-  test("get footer", () => {
+  test("get chart second card", () => {
     const { getByTestId } = render(
       <BrowserRouter>
         <StoreProvider>
           <SocketProvider>
-            <App />
+            <ChartPage />
           </SocketProvider>
         </StoreProvider>
       </BrowserRouter>
     );
 
-    const element = getByTestId("footer");
+    const element = getByTestId("chart-second-card");
 
     expect(element).toBeInTheDocument();
   });
