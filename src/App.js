@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Layout, notification } from "antd";
-import { CoffeeOutlined, HeartOutlined } from "@ant-design/icons";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useLocation } from "react-router-dom";
 import { useObserver } from "mobx-react-lite";
 
 import useSocket from "contexts/useSocket";
 import useUserStore from "domains/user/useUserStore";
 import Header from "domains/app/Header";
+import Footer from "domains/app/Footer";
 import LoginPage from "domains/user/LoginPage";
 import ChartPage from "domains/dashboard/ChartPage";
 import ListPage from "domains/dashboard/ListPage";
@@ -69,49 +69,54 @@ export default function App() {
   useSocketConnection(socket, userStore);
   useSocketLogginMessage(socket, userStore);
 
+  const location = useLocation();
+
+  const redirectTo = useMemo(() => {
+    const query = new URLSearchParams(location.search);
+
+    const redirectTo = query.get("redirectTo");
+    if (!redirectTo || redirectTo === "/login") return "/";
+
+    return redirectTo;
+  }, [location.search]);
+
   return useObserver(() => (
     <Layout className="min-h-screen">
       <Header />
 
       <Layout>
-        <Layout>
-          <Layout.Content>
-            <Switch>
-              {!userStore.userIsLogged && (
-                <Route path="/login" exact>
-                  <LoginPage />
-                </Route>
-              )}
+        <Layout.Content>
+          <Switch>
+            {!userStore.userIsLogged && (
+              <Route path="/login" exact>
+                <LoginPage />
+              </Route>
+            )}
 
-              {userStore.userIsLogged && (
-                <Route path="/" exact>
-                  <ChartPage />
-                </Route>
-              )}
+            {userStore.userIsLogged && (
+              <Route path="/" exact>
+                <ChartPage />
+              </Route>
+            )}
 
-              {userStore.userIsLogged && (
-                <Route path="/list" exact>
-                  <ListPage />
-                </Route>
-              )}
+            {userStore.userIsLogged && (
+              <Route path="/list" exact>
+                <ListPage />
+              </Route>
+            )}
 
-              <Redirect to={userStore.userIsLogged ? "/" : "/login"} />
-            </Switch>
-          </Layout.Content>
-        </Layout>
+            <Redirect
+              to={
+                userStore.userIsLogged
+                  ? redirectTo
+                  : `/login?redirectTo=${location.pathname}`
+              }
+            />
+          </Switch>
+        </Layout.Content>
       </Layout>
 
-      <Layout.Footer className="text-center">
-        Created by{" "}
-        <a
-          href="https://github.com/marceloadsj"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Marcelo Junior (@marceloadsj)
-        </a>{" "}
-        with <HeartOutlined /> and <CoffeeOutlined />
-      </Layout.Footer>
+      <Footer />
     </Layout>
   ));
 }
